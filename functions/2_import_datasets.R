@@ -12,30 +12,30 @@ cati_response$date_assessment <- format(as.Date(cati_response$ObsDate), "%B-%y")
 #group months together to trimesters
 cati_response <- cati_response %>% mutate(quarter = case_when(
   cati_response$date_assessment %in% c("abril-20", "mayo-20", "junio-20")  ~ "2020_2",
-  cati_response$date_assessment %in% c("julio-20", "agosto-20", "sepiembre-20")  ~ "2020_3",
+  cati_response$date_assessment %in% c("julio-20", "agosto-20", "septiembre-20")  ~ "2020_3",
   cati_response$date_assessment %in% c("octubre-20", "noviembre-20", "diciembre-20")  ~ "2020_4",
   cati_response$date_assessment %in% c("enero-21", "febrero-21", "marzo-21")  ~ "2021_1",
   cati_response$date_assessment %in% c("abril-21", "mayo-21", "junio-21")  ~ "2021_2",
-  cati_response$date_assessment %in% c("julio-21", "agosto-21", "sepiembre-21")  ~ "2021_3",
+  cati_response$date_assessment %in% c("julio-21", "agosto-21", "septiembre-21")  ~ "2021_3",
   cati_response$date_assessment %in% c("octubre-21", "noviembre-21", "diciembre-21")  ~ "2021_4",
   cati_response$date_assessment %in% c("enero-22", "febrero-22", "marzo-22")  ~ "2022_1",
   
   cati_response$date_assessment %in% c("abril-22", "mayo-22", "junio-22")  ~ "2022_2",
-  cati_response$date_assessment %in% c("julio-22", "agosto-22", "sepiembre-22")  ~ "2022_3",
+  cati_response$date_assessment %in% c("julio-22", "agosto-22", "septiembre-22")  ~ "2022_3",
   cati_response$date_assessment %in% c("octubre-22", "noviembre-22", "diciembre-22")  ~ "2022_4",
   cati_response$date_assessment %in% c("enero-23", "febrero-23", "marzo-23")  ~ "2023_1",
   cati_response$date_assessment %in% c("abril-23", "mayo-23", "junio-23")  ~ "2023_2",
-  cati_response$date_assessment %in% c("julio-23", "agosto-23", "sepiembre-23")  ~ "2023_3",
+  cati_response$date_assessment %in% c("julio-23", "agosto-23", "septiembre-23")  ~ "2023_3",
   cati_response$date_assessment %in% c("octubre-23", "noviembre-23", "diciembre-23")  ~ "2023_4",
   
   cati_response$date_assessment %in% c("enero-24", "febrero-24", "marzo-24")  ~ "2024_1",
   cati_response$date_assessment %in% c("abril-24", "mayo-24", "junio-24")  ~ "2024_2",
-  cati_response$date_assessment %in% c("julio-24", "agosto-24", "sepiembre-24")  ~ "2024_3",
+  cati_response$date_assessment %in% c("julio-24", "agosto-24", "septiembre-24")  ~ "2024_3",
   cati_response$date_assessment %in% c("octubre-24", "noviembre-24", "diciembre-24")  ~ "2024_4",
   
   cati_response$date_assessment %in% c("enero-25", "febrero-25", "marzo-25")  ~ "2025_1",
   cati_response$date_assessment %in% c("abril-25", "mayo-25", "junio-25")  ~ "2025_2",
-  cati_response$date_assessment %in% c("julio-25", "agosto-25", "sepiembre-25")  ~ "2025_3",
+  cati_response$date_assessment %in% c("julio-25", "agosto-25", "septiembre-25")  ~ "2025_3",
   cati_response$date_assessment %in% c("octubre-25", "noviembre-25", "diciembre-25")  ~ "2025_4"))
 
 

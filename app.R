@@ -141,31 +141,79 @@ ui <- bs4DashPage(
   tabItems(
     bs4TabItem(tabName = "subtab_consumo",
                fluidRow(
+                 style = "margin-top: 0px; margin-bottom: 0px; margin-left: 0px;",
                  column(width = 5,
-                        style = "margin-top: 0px; margin-bottom: -20px; margin-left: 0px;",
+                        style = "margin-top: 0px; margin-bottom: 10px; margin-left: 0px;",
                         h3("Consumo de Alimentos", style = "color: #434348;"),
                         tags$div(
                           style = "color: #434348; text-align: justify;",
                           tags$span(
-                            HTML("El <strong>Food Consumption Score (FCS)</strong> del PMA evalúa el consumo de alimentos de un hogar basándose en el número de días de la última semana en que los miembros del hogar han comido determinados tipos de alimentos (por ejemplo, proteínas, verduras, frutas, etc.). Cada tipo de alimento tiene un peso específico basado en su valor nutricional y cada hogar se clasifica en una de las tres categorías de gravedad: pobre, limitrofe o aceptable. <br> <br> Otro indicador que evalúa la situación del consumo de alimentos de un hogar es el <strong>Coping Strategies Index (CSI)</strong>, que examina el número de días a la semana que un hogar emplea estrategias relacionadas con el consumo (por ejemplo, reducir el número de comidas al día, reducir las porciones de comida, etc.) porque no tiene suficientes alimentos o dinero para comprarlos.")
+                            HTML("El <strong>Food Consumption Score (FCS) </strong> del PMA evalúa el consumo de alimentos de un hogar basándose en el número de días de la semana anterior en que los miembros del hogar han comido ocho tipos diferentes de alimentos (es decir, proteínas, verduras, frutas, cereales, legumbres, productos lácteos, azúcar y aceite). A continuación, estos datos se ponderan en función del valor nutricional relativo de los grupos de alimentos consumidos. Por ejemplo, los grupos de alimentos que contienen alimentos densos desde el punto de vista nutricional, como los productos animales, tienen más peso que los que contienen alimentos menos densos desde el punto de vista nutricional, como los tubérculos. <br>En función de la puntuación final del consumo de alimentos, cada hogar se clasifica en una de las tres categorías de gravedad: <strong><span style='color: #6D545D;'>pobre</span>, <span style='color: #F5E8B7;'>limitrofe</span> o <span style='color: #C5C889;'>aceptable</span></strong>.")
                           )
                         )),
                  column(width = 7,
-                        highchartOutput("pie_chart_fcs", height = "80vh", width = "60vw"))
+                        highchartOutput("pie_chart_fcs", height = "75vh", width = "60vw"))
                ),
                
                br(),
                
                fluidRow(
+                 style = "margin-top: 30px; margin-bottom: 0px; margin-left: 0px;",
                  column(width = 5,
-                        style = "margin-top: -70px; margin-bottom: -10px; margin-left: 0px;",
+                        style = "margin-top: -30px; margin-bottom: -10px; margin-left: 0px;",
                         highchartOutput("map_fcs", width = "100%", height = "500px")
                         ),
                  
                  column(width = 7,
-                        style = "margin-top: 40px; margin-left: 0px;",
-                        highchartOutput("area_chart_fcs", width = "100%", height = "400px")
+                        style = "margin-top: 20px; margin-left: 0px;",
+                        highchartOutput("area_chart_fcs", width = "100%", height = "450px")
                  )
+               ),
+               
+               fluidRow(
+                 style = "margin-top: 30px; margin-bottom: 90px; margin-left: 0px;",
+                 column(width = 5,
+                        style = "margin-top: 20px; margin-bottom: -10px; margin-left: 0px;",
+                        highchartOutput("spider_fcs", width = "100%", height = "500px")
+                        ),
+                 column(width = 7,
+                        style = "margin-top: 80px; margin-left: 0px;",
+                        highchartOutput("line_fcs", width = "100%", height = "400px")
+                 )
+                 
+               ),
+               
+               tags$hr(style="border-color: #636458;"),
+               
+               
+               fluidRow(
+                 column(width = 5,
+                        style = "margin-top: 80px; margin-bottom: 0px; margin-left: 0px;",
+                        h3("Estrategias de Consumo:", style = "color: #434348;"),
+                        tags$div(
+                          style = "color: #434348; text-align: justify;",
+                          tags$span(
+                            HTML("Otro indicador que evalúa la situación de consumo de alimentos de un hogar es el <strong>Coping Strategy Index (CSI) </strong>. El CSI evalúa en qué medida los hogares utilizan estrategias de afrontamiento perjudiciales cuando no tienen suficientes alimentos o dinero para comprarlos. <br>Se pregunta a cada hogar cuántos días de los últimos siete han tenido que emplear una de las cinco estrategias basadas en el consumo debido a la falta de alimentos o de dinero para comprarlos: 1) comer menos alimentos preferidos, 2) reducir el número de comidas diarias, 3) reducir el tamaño de las porciones de las comidas, 4) comprar alimentos a crédito o pedirlos prestados y 5) reducir las raciones de alimentos de los adultos para que los niños tengan más alimentos para comer.")
+                          )
+                        )),
+                 column(width = 6,
+                        style = "margin-top: 70px; margin-bottom: -10px; margin-left: 30px;",
+                        highchartOutput("stackbar_csi", height = "60vh", width = "110%")
+               )
+               ),
+               
+               fluidRow(
+                 style = "margin-top: 30px; margin-bottom: 0px; margin-left: 0px;",
+                 column(width = 8,
+                        style = "margin-top: 30px; margin-bottom: -10px; margin-left: 0px; margin-right: 0px;",
+                        highchartOutput("linechart_csi", height = "80vh", width = "85%")
+                        ),
+                 
+                 column(width = 4,
+                        style = "margin-top: 30px; margin-bottom: -10px; margin-left: 0px;",
+                        highchartOutput("stacked_barchart_csi", height = "80vh", width = "100%")
+                 )
+                 
                )
                
     )
@@ -174,6 +222,11 @@ ui <- bs4DashPage(
   ) #CLOSE DASHBOARDBODY
 
 ) #CLOSE UI
+
+
+
+
+
 
 
 
@@ -205,7 +258,7 @@ pie_chart_maker_fcs <- function(){
     rename(name = num_variable) %>%
     select(-Frequency)
   
-  rd_bu_palette <- c("#6A9C89", "#F5E8B7", "#CD5C08")
+  rd_bu_palette <- c("#C5C889", "#F0DFAD", "#6D545D")
   
   highchart() %>%
     hc_add_series(type = "pie", data = pie_chart, hcaes(x = name, y = y), innerSize = "50%", marginLeft = -40, marginTop = -20) %>%
@@ -243,16 +296,16 @@ area_chart %>%
     hcaes(x = quarter, y = y, group = name)) %>%
   hc_xAxis(title = list(text = "Trimestre")) %>%
   hc_yAxis(
-    title = list(text = "% de hogares"),
+    title = list(text = ""),
     max = 100,  # Set the maximum value for the y-axis
     labels = list(formatter = JS("function () {return this.value + '%';}"))) %>%
   hc_plotOptions(
     area = list(
       stacking = "normal", # Stacking mode
       marker = list(enabled = FALSE))) %>%
-  hc_colors(c("#6A9C89", "#F5E8B7", "#CD5C08")) %>%
+  hc_colors(c("#C5C889", "#F0DFAD", "#6D545D")) %>%
   hc_tooltip(
-    valueSuffix = "%")
+    valueSuffix = "% de hogares")
 }
 
 output$area_chart_fcs <- renderHighchart({
@@ -291,6 +344,236 @@ output$map_fcs <- renderHighchart({
   map_maker_fcs()
 })
 
+
+
+
+##############################################################
+#FIRST PAGE - SPIDER CHART FOR CONSUMPTION BY TYPE
+#############################################################
+spider_maker_fcs <- function(){
+  
+spider_colombian <- cati_with_composites %>%
+  filter(migration_status == "Colombianos") %>%
+  summarise("Cereales" = as.numeric(round(mean(FCSStap, na.rm = TRUE), 1)),
+            "Leguminosas" = as.numeric(round(mean(FCSPulse, na.rm = TRUE), 1)),
+            "Leche" = as.numeric(round(mean(FCSDairy, na.rm = TRUE), 1)),
+            "Carne" = as.numeric(round(mean(FCSPr, na.rm = TRUE), 1)),
+            "Vegetales" = as.numeric(round(mean(FCSVeg, na.rm = TRUE), 1)),
+            "Frutas" = as.numeric(round(mean(FCSFruit, na.rm = TRUE), 1))
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "name", values_to = "nr_dias") %>%
+  arrange(desc(nr_dias)) %>%
+  rename("Nr dias" = nr_dias)
+
+
+spider_migrante <- cati_with_composites %>%
+  filter(migration_status == "Migrantes") %>%
+  summarise("Cereales" = as.numeric(round(mean(FCSStap, na.rm = TRUE), 1)),
+            "Leguminosas" = as.numeric(round(mean(FCSPulse, na.rm = TRUE), 1)),
+            "Leche" = as.numeric(round(mean(FCSDairy, na.rm = TRUE), 1)),
+            "Carne" = as.numeric(round(mean(FCSPr, na.rm = TRUE), 1)),
+            "Vegetales" = as.numeric(round(mean(FCSVeg, na.rm = TRUE), 1)),
+            "Frutas" = as.numeric(round(mean(FCSFruit, na.rm = TRUE), 1))
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "name", values_to = "nr_dias") %>%
+  arrange(desc(nr_dias)) %>%
+  rename("Nr dias" = nr_dias)
+
+highchart() %>%
+  hc_chart(type = 'line', polar = TRUE) %>%
+  hc_xAxis(categories = spider_colombian$name,
+           labels = list(
+             style = list(fontSize = '10px'))) %>%
+  hc_add_series(
+    spider_colombian$`Nr dias`,
+    name = 'Colombianos',
+    dataLabels = list(enabled = TRUE),
+    color = '#636458',
+    lineWidth = 2) %>%
+  hc_add_series(
+    spider_migrante$`Nr dias`,
+    name = 'Migrantes',
+    dataLabels = list(enabled = TRUE),
+    color = '#C5C889',
+    lineWidth = 2) %>%
+  hc_yAxis(
+    gridLineInterpolation = 'circle',
+    min = 0,
+    max = 6.2,
+    labels = list(
+      formatter = JS("function() {
+        return this.value + 'd';}"))) %>%
+  hc_tooltip(valueSuffix = " dias") %>%
+  hc_legend(itemStyle = list(fontSize = '16px')) %>%
+  hc_title(text = "Número de días que los miembros del hogar comen distintos tipos de alimentos", margin = -5, align = "left",   style = list(fontSize = "16px"))
+
+}
+
+output$spider_fcs <- renderHighchart({
+  spider_maker_fcs()
+})
+
+
+
+
+##############################################################
+#FIRST PAGE - LINE CHART FOR TENDENCIES OF CONSUMPTION BY FOOD TYPE
+#############################################################
+line_maker_fcs <- function(){
+  
+line_cart_consumo <- cati_with_composites %>%
+  group_by(quarter) %>%
+  summarise("Cereales" = as.numeric(round(mean(FCSStap, na.rm = TRUE), 1)),
+            "Leguminosas" = as.numeric(round(mean(FCSPulse, na.rm = TRUE), 1)),
+            "Leche" = as.numeric(round(mean(FCSDairy, na.rm = TRUE), 1)),
+            "Carne" = as.numeric(round(mean(FCSPr, na.rm = TRUE), 1)),
+            "Vegetales" = as.numeric(round(mean(FCSVeg, na.rm = TRUE), 1)),
+            "Frutas" = as.numeric(round(mean(FCSFruit, na.rm = TRUE), 1))) 
+
+
+highchart() %>%
+  hc_chart(type = 'line') %>%
+  hc_xAxis(categories = line_cart_consumo$quarter) %>%
+  hc_add_series(
+    line_cart_consumo$Cereales, name = 'Cereales', color = '#66545e', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_consumo$Carne, name = 'Carne', color = '#a39193', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_consumo$Leche, name = 'Productos Lacteos', color = '#aa6f73', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_consumo$Vegetales, name = 'Vegetales ', color = '#eea990', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_consumo$Frutas, name = 'Frutas ', color = '#f6e0b5', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_yAxis(
+    gridLineInterpolation = 'circle', min = 0, max = 7,
+    labels = list(
+      formatter = JS("function() {return this.value + 'd';}"))) %>%
+  hc_tooltip(valueSuffix = " dias")
+}
+
+output$line_fcs <- renderHighchart({
+  line_maker_fcs()
+})
+
+
+
+
+##############################################################
+#STACKED BAR CHART SHOWING NUMBER OF MEALS
+#############################################################
+stackedbar_maker_csi <- function(){
+  
+  analysis_lcs <-  cati_with_composites %>%
+    summarise("Comer comida menos preferida" = as.numeric(round(mean(rCSILessQlty, na.rm = TRUE), 1)),
+              "Comprar a credito" = as.numeric(round(mean(rCSIBorrow, na.rm = TRUE), 1)),
+              "Reducir numero comidas" = as.numeric(round(mean(rCSIMealNb, na.rm = TRUE), 1)),
+              "Reducir tamaño porciones" = as.numeric(round(mean(rCSIMealSize, na.rm = TRUE), 1)),
+              "Reducir consumo de adultos" = as.numeric(round(mean(rCSIMealAdult, na.rm = TRUE), 1))) %>%
+    pivot_longer(cols = everything(), names_to = "CSI_Estrategias", values_to = "nr_dias") %>%
+    arrange(desc(nr_dias)) %>%
+    rename("%" = nr_dias) 
+  
+  colors <- colorRampPalette(c("#434348", "#C5C889"))(length(analysis_lcs$CSI_Estrategias))
+  
+  hchart(analysis_lcs, type = "bar", hcaes(x = `CSI_Estrategias`, y = `%`), pointWidth = 43) %>%
+    hc_tooltip(
+      valueSuffix = " dias", pointFormat = "{point.name}: <b>{point.y}</b>") %>%
+    hc_xAxis(
+      labels = list(style = list(color = "black", fontSize = "14px")), title = NULL) %>%
+    hc_yAxis(
+      labels = list(style = list(color = "black")), title = "") %>%
+    hc_plotOptions(
+      bar = list(colorByPoint = TRUE, colors = colors))
+}
+
+output$stackbar_csi <- renderHighchart({
+  stackedbar_maker_csi()
+})
+
+
+
+
+##############################################################
+#LINE CHART FOR TENDENCIES OF EMPLOYMENT OF CSI STRATEGIES
+#############################################################
+linechart_maker_csi <- function(){
+  
+line_cart_csi <- cati_with_composites %>%
+  group_by(quarter) %>%
+  summarise("Comer comida menos preferida" = as.numeric(round(mean(rCSILessQlty, na.rm = TRUE), 1)),
+            "Comprar a credito" = as.numeric(round(mean(rCSIBorrow, na.rm = TRUE), 1)),
+            "Reducir numero comidas" = as.numeric(round(mean(rCSIMealNb, na.rm = TRUE), 1)),
+            "Reducir tamaño porciones" = as.numeric(round(mean(rCSIMealSize, na.rm = TRUE), 1)),
+            "Reducir consumo de adultos" = as.numeric(round(mean(rCSIMealAdult, na.rm = TRUE), 1)))
+
+
+highchart() %>%
+  hc_chart(type = 'line') %>%
+  hc_xAxis(categories = line_cart_csi$quarter) %>%
+  hc_add_series(
+    line_cart_csi$`Comer comida menos preferida`, name = 'Comida menos preferido', color = '#66545e', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_csi$`Comprar a credito`, name = 'Comprar comida a credito', color = '#a39193', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_csi$`Reducir numero comidas`, name = 'Reducir numero comidas', color = '#aa6f73', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_csi$`Reducir tamaño porciones`, name = 'Reducir tamaño porciones ', color = '#eea990', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_add_series(
+    line_cart_csi$`Reducir consumo de adultos`, name = 'Reducir consumo de adultos ', color = '#f6e0b5', lineWidth = 2, marker = list(enabled = F)) %>%
+  hc_yAxis(
+    gridLineInterpolation = 'circle', min = 0, max = 6,
+    labels = list(
+      formatter = JS("function() {return this.value + 'd';}"))) %>%
+  hc_tooltip(valueSuffix = " dias")
+}
+
+output$linechart_csi <- renderHighchart({
+  linechart_maker_csi()
+})
+
+
+
+
+##############################################################
+#STACKED BAR CHART SHOWING NUMBER OF MEALS
+#############################################################
+stacked_barchahrt_maker_csi <- function(){
+  
+stacked_bar <- cati_with_composites %>% 
+  mutate(num_variable = HHMealNb) %>%
+  count(num_variable, name = "Frequency") %>%
+  mutate(y = round(100* (Frequency / sum(Frequency)),0)) %>%
+  rename(name = num_variable) %>%
+  select(-Frequency) %>%
+  pivot_wider(names_from = name, values_from = y)
+
+stacked_bar$category <- ""
+
+highchart() %>%
+  hc_chart(type = "column") %>%
+  hc_title(text = "Número de comidas el dia de ayer", margin = 20, align = "left", style = list(fontSize = "16px")) %>%
+  hc_xAxis(categories = stacked_bar$category, labels = list(enabled = FALSE)) %>%
+  hc_yAxis(max = 100, labels = list(format = "{value}%")) %>%
+  hc_plotOptions(
+    column = list(stacking = "normal",
+                  dataLabels = list(
+                    enabled = TRUE,
+                    format = "{y}%",
+                    style = list(fontSize = "14px"),
+                    textShadow = "none"))) %>%
+  hc_add_series(
+    name = "1 Comida", data = stacked_bar$`1 MEAL`, color = "#434348") %>%
+  hc_add_series(
+    name = "2 Comidas", data = stacked_bar$`2 MEALS`, color = "#838568") %>%
+  hc_add_series(
+    name = "3 Comidas", data = stacked_bar$`3 OR MORE MEALS`, color = "#C5C889") %>%
+  hc_tooltip(valueSuffix = "% de hogares", headerFormat = '<span style="font-size: 10px">numero de comidas:</span><br/>') %>%
+  hc_legend(itemStyle = list(fontSize = '13px'))  # Increase the legend item font size
+}
+
+output$stacked_barchart_csi <- renderHighchart({
+  stacked_barchahrt_maker_csi()
+})
 
 
 
